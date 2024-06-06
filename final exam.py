@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 
-#inserting data
+#inserting data logic
 def data():
     global current_index
     student_name = entry1.get()
@@ -16,7 +16,7 @@ def data():
     entry2.delete(0, tk.END)
     current_index += 1
 
-#deleting data
+#deleting data logic
 def delete():
     selected = tree.selection()
     if selected:
