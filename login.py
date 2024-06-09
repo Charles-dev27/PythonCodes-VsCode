@@ -76,7 +76,7 @@ password_entry.pack()
 password_indicator = tk.Label(main_frame, text='', bg='khaki')
 password_indicator.pack()
 
-show_pass_btn = tk.Button(main_frame, text='Hide', bg='khaki', fg='brown', font=('arial', 10, 'bold'), command=show_password)
+show_pass_btn = tk.Button(main_frame, text='Show', bg='khaki', fg='brown', font=('arial', 10, 'bold'), command=show_password)
 show_pass_btn.place(x=250, y=105)
 
 login_btn = tk.Button(main_frame, text='Login', bg='khaki', fg='brown', font=('arial', 10, 'bold'), command=login).pack(pady=10)
