@@ -6,6 +6,7 @@ window.title('Login')
 window.config(bg='Khaki')
 window.geometry('550x440')
 
+# Check if the user entry has all this characters
 def is_valid_user(user):
     if (len(user) >= 8 and
         any(c.isalpha() for c in user) and
@@ -13,6 +14,7 @@ def is_valid_user(user):
         return True
     return False
 
+# Check if the password entry has all this characters
 def is_valid_password(password):
     if (len(password) >= 8 and
         (any(c.isalpha() for c in password)or '@'in password) and
@@ -21,6 +23,7 @@ def is_valid_password(password):
         return True
     return False
 
+#update the user indicator label if all requirements are met
 def on_user_change(*args):
     user = user_valid.get()
     if is_valid_user(user):
@@ -28,6 +31,7 @@ def on_user_change(*args):
     else:
         user_indicator.config(text='❌Invalid Username', fg='red')
 
+#update the password indicator label if all requirements are met
 def on_pass_change(*args):
     password = password_valid.get()
     if is_valid_password(password):
@@ -35,6 +39,7 @@ def on_pass_change(*args):
     else:
         password_indicator.config(text='❌Invalid Password', fg='red')
 
+#show and hide logic
 def show_password():
     if password_entry.cget('show') == '':
         password_entry.config(show='*')
@@ -43,6 +48,7 @@ def show_password():
         password_entry.config(show='')
         show_pass_btn.config(text='Hide')
 
+#Check if all reuiremets are met otherwise it will show an error
 def login():
     user = username_entry.get()
     password = password_entry.get()
@@ -55,6 +61,7 @@ def login():
     else:
         messagebox.showerror('Login Unsuccsesful', 'Please Try Again')
 
+#deletes a value inside the treeview
 def delete():
     selected = tree.selection()
     if selected:
