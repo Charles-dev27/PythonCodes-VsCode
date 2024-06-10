@@ -1,10 +1,10 @@
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, ttk
 
 window = tk.Tk()
 window.title('Login')
 window.config(bg='Khaki')
-window.geometry('440x440')
+window.geometry('550x440')
 
 def is_valid_user(user):
     if (len(user) >= 8 and
@@ -46,10 +46,21 @@ def show_password():
 def login():
     user = username_entry.get()
     password = password_entry.get()
-    if user and password:
-        messagebox.showinfo('Login Success', f'Welcome {user}')
+    masked_password = '*' * len(password)
+    if is_valid_user(user) and is_valid_password(password):
+        messagebox.showinfo('Login Success', f'Welcome {user} 👋🏾')
+        tree.insert('', 'end', values=(user, masked_password))
+        username_entry.delete(0, tk.END)
+        password_entry.delete(0, tk.END)
     else:
         messagebox.showerror('Login Unsuccsesful', 'Please Try Again')
+
+def delete():
+    selected = tree.selection()
+    if selected:
+        tree.delete(selected)
+    else:
+        messagebox.showwarning('Invalid', 'Please Select Atleast One(1) Items Below')
 
 main_frame = tk.LabelFrame(window, text='Login Form', font=('arial', 15), fg='purple', bg='khaki', padx=20, pady=20)
 main_frame.pack(expand=True, fill='both', padx=20, pady=20, anchor='center')
@@ -77,7 +88,17 @@ password_indicator = tk.Label(main_frame, text='', bg='khaki')
 password_indicator.pack()
 
 show_pass_btn = tk.Button(main_frame, text='Show', bg='khaki', fg='brown', font=('arial', 10, 'bold'), command=show_password)
-show_pass_btn.place(x=250, y=105)
+show_pass_btn.place(x=300, y=80)
 
-login_btn = tk.Button(main_frame, text='Login', bg='khaki', fg='brown', font=('arial', 10, 'bold'), command=login).pack(pady=10)
+login_btn = tk.Button(main_frame, text='Login', bg='khaki', fg='brown', font=('arial', 10, 'bold'), command=login).pack()
+
+delete_btn = tk.Button(main_frame, text='Delete', bg='khaki', fg='brown', font=('arial', 10, 'bold'), command=delete)
+delete_btn.place(x=350, y=80)
+
+tree = ttk.Treeview(main_frame, columns=('username', 'password'), show='headings')
+tree.column('username', anchor='center', stretch='NO')
+tree.heading('username', text='Username')
+tree.column('password', anchor='center', stretch='NO')
+tree.heading('password', text='Password')
+tree.pack(pady=10)
 window.mainloop()
